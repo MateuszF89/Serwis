@@ -68,7 +68,7 @@
                     <a href="#"><i class="fa fa-table "></i>Serwis<span class="fa arrow"></span></a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a href="#">Zamówienia</a>
+                            <a href="/serviceOrder/listOfOrders">Zamówienia</a>
                         </li>
                         <li>
                             <a href="#">Planowanie</a>

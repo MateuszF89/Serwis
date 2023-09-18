@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: mateu
   Date: 18.09.2023
-  Time: 10:01
+  Time: 11:31
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,35 +92,54 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Edytuj urządzenie</h2>
+                    <h2>Zamówienia</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="/serviceOrder/addOrder" class="btn btn-warning">Dodaj zamówienie</a>
+                </div>
+            </div>
+            <br />
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nazwa firmy</th>
+                            <th>Miasto</th>
+                            <th>Kod pocztowy</th>
+                            <th>Ulica</th>
+                            <th>Rodzaj usługi</th>
+                            <th>Data zamówienia</th>
+                            <th>Akcja</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${orders}" var="order">
+                            <tr>
+                                <td>${order.client.companyName}</td>
+                                <td>${order.client.city}</td>
+                                <td>${order.client.zipCode}</td>
+                                <td>${order.client.street}</td>
+                                <td>${order.typeOfService}</td>
+                                <td>${order.orderDate}</td>
+                                <td>
+                                    <form method="post" action="/serviceOrder/deleteOrder" style="display: inline-block;">
+                                        <input type="hidden" name="orderId" value="${order.id}" />
+                                        <button type="submit" class="btn btn-danger">Usuń zamówienie</button>
+                                    </form>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- /. ROW  -->
             <hr />
-            <form:form action="/client/editDevice" method="post" modelAttribute="device">
-                <input type="hidden" name="deviceId" value="${device.id}" />
-                <input type="hidden" name="clientId" value="${client.id}" />
-
-                <div class="form-group">
-                    <label for="type">Typ:</label>
-                    <form:input type="text" path="type" id="type" class="form-control" style="width: 200px;" />
-                    <form:errors path="type" element="div" class="error-message" />
-                </div>
-
-                <div class="form-group">
-                    <label for="serialNumber">Numer seryjny:</label>
-                    <form:input type="text" path="serialNumber" id="serialNumber" class="form-control" style="width: 200px;" />
-                    <form:errors path="serialNumber" element="div" class="error-message" />
-                </div>
-
-                <div class="form-group">
-                    <label for="yearOfManufacture">Rok produkcji:</label>
-                    <form:input type="text" path="yearOfManufacture" id="yearOfManufacture" class="form-control" style="width: 200px;" />
-                    <form:errors path="yearOfManufacture" element="div" class="error-message" />
-                </div>
-
-                <button type="submit" class="btn btn-success">Zapisz</button>
-            </form:form>
         </div>
         <!-- /. PAGE INNER  -->
     </div>

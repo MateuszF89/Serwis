@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: mateu
   Date: 18.09.2023
-  Time: 10:01
+  Time: 12:23
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,33 +92,30 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Edytuj urządzenie</h2>
+                    <h2>Dodaj zamówienie</h2>
                 </div>
             </div>
             <!-- /. ROW  -->
             <hr />
-            <form:form action="/client/editDevice" method="post" modelAttribute="device">
-                <input type="hidden" name="deviceId" value="${device.id}" />
-                <input type="hidden" name="clientId" value="${client.id}" />
-
+            <form:form action="/serviceOrder/addOrder" method="post" modelAttribute="serviceOrder">
                 <div class="form-group">
-                    <label for="type">Typ:</label>
-                    <form:input type="text" path="type" id="type" class="form-control" style="width: 200px;" />
-                    <form:errors path="type" element="div" class="error-message" />
+                    <label for="orderDate">Data zamówienia:</label>
+                    <form:input type="date" path="orderDate" id="orderDate" name="orderDate" class="form-control" style="width: 200px;" />
+                    <form:errors path="orderDate" element="div" class="error-message" />
                 </div>
-
                 <div class="form-group">
-                    <label for="serialNumber">Numer seryjny:</label>
-                    <form:input type="text" path="serialNumber" id="serialNumber" class="form-control" style="width: 200px;" />
-                    <form:errors path="serialNumber" element="div" class="error-message" />
+                    <label for="serviceType">Rodzaj usługi:</label>
+                    <form:input type="text" path="typeOfService" id="serviceType" name="typeOfService" class="form-control" style="width: 200px;" />
+                    <form:errors path="typeOfService" element="div" class="error-message" />
                 </div>
-
                 <div class="form-group">
-                    <label for="yearOfManufacture">Rok produkcji:</label>
-                    <form:input type="text" path="yearOfManufacture" id="yearOfManufacture" class="form-control" style="width: 200px;" />
-                    <form:errors path="yearOfManufacture" element="div" class="error-message" />
+                    <label for="client">Klient:</label>
+                    <form:select path="client.id" id="client" name="client.id" class="form-control" style="width: 200px;">
+                        <form:option value="" label="Wybierz klienta" />
+                        <form:options items="${clients}" itemValue="id" itemLabel="companyName" />
+                    </form:select>
+                    <form:errors path="client.id" element="div" class="error-message" />
                 </div>
-
                 <button type="submit" class="btn btn-success">Zapisz</button>
             </form:form>
         </div>

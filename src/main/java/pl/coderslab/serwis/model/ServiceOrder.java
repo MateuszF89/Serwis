@@ -1,6 +1,9 @@
 package pl.coderslab.serwis.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
 
 @Entity
@@ -10,24 +13,24 @@ public class ServiceOrder {
     private Long id;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate orderDate;
 
     @OneToOne
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    @OneToOne
-    @JoinColumn(name = "service_id", nullable = false)
-    private Service service;
+    @NotBlank(message = "Pole jest wymagane.")
+    private String typeOfService;
 
     public ServiceOrder() {
     }
 
-    public ServiceOrder(Long id, LocalDate orderDate, Client client, Service service) {
+    public ServiceOrder(Long id, LocalDate orderDate, Client client, String typeOfService) {
         this.id = id;
         this.orderDate = orderDate;
         this.client = client;
-        this.service = service;
+        this.typeOfService = typeOfService;
     }
 
     public Long getId() {
@@ -54,12 +57,12 @@ public class ServiceOrder {
         this.client = client;
     }
 
-    public Service getService() {
-        return service;
+    public String getTypeOfService() {
+        return typeOfService;
     }
 
-    public void setService(Service service) {
-        this.service = service;
+    public void setTypeOfService(String typeOfService) {
+        this.typeOfService = typeOfService;
     }
 
     @Override
@@ -68,7 +71,7 @@ public class ServiceOrder {
                 "id=" + id +
                 ", orderDate=" + orderDate +
                 ", client=" + client +
-                ", service=" + service +
+                ", typeOfService='" + typeOfService + '\'' +
                 '}';
     }
 }

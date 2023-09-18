@@ -1,5 +1,7 @@
 package pl.coderslab.serwis.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
@@ -12,9 +14,11 @@ public class ServicePlan {
     private Long id;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate planeDate;
 
     @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate executionDate;
 
     @NotBlank(message = "Pole jest wymagane.")
