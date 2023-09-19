@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: mateu
-  Date: 17.09.2023
-  Time: 10:25
+  Date: 18.09.2023
+  Time: 14:04
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,26 +92,51 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Dodaj pracownika</h2>
+                    <h2>Planowanie serwisu</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <br />
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nazwa firmy</th>
+                            <th>Miasto</th>
+                            <th>Kod pocztowy</th>
+                            <th>Ulica</th>
+                            <th>Rodzaj usługi</th>
+                            <th>Data zamówienia</th>
+                            <th>Akcja</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${orders}" var="order">
+                            <c:if test="${order.status == 'UNPLANNED'}">
+                                <tr>
+                                    <td>${order.client.companyName}</td>
+                                    <td>${order.client.city}</td>
+                                    <td>${order.client.zipCode}</td>
+                                    <td>${order.client.street}</td>
+                                    <td>${order.typeOfService}</td>
+                                    <td>${order.orderDate}</td>
+                                    <td>
+                                        <form method="get" action="/servicePlan/planService" style="display: inline-block;">
+                                            <input type="hidden" name="orderId" value="${order.id}" />
+                                            <button type="submit" class="btn btn-danger">Zaplanuj serwis</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- /. ROW  -->
             <hr />
-            <form:form action="/employee/addEmployee" method="post" modelAttribute="employee">
-
-                <div class="form-group">
-                    <label for="firstName">Imię:</label>
-                    <form:input type="text" path="firstName" id="firstName" class="form-control" style="width: 200px;" />
-                    <form:errors path="firstName" element="div" class="error-message" />
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Nazwisko:</label>
-                    <form:input type="text" path="lastName" id="type" class="form-control" style="width: 200px;" />
-                    <form:errors path="lastName" element="div" class="error-message" />
-                </div>
-                <button type="submit" class="btn btn-success">Zapisz</button>
-            </form:form>
-
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -128,4 +153,4 @@
 <!-- CUSTOM SCRIPTS -->
 <script src="/js/custom.js"></script>
 </body>
-</html>
+

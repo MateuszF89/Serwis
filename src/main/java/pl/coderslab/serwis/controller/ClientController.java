@@ -25,11 +25,6 @@ public class ClientController {
         return "client/listOfClients";
     }
 
-    @PostMapping("/delete")
-    public String deleteClient(@RequestParam("clientId") Long id) {
-        clientService.deleteClient(id);
-        return "redirect:/client/listOfClients";
-    }
 
     @GetMapping("/addClient")
     public String showAddClientForm(Model model) {
@@ -79,11 +74,6 @@ public class ClientController {
         return "redirect:/client/listOfClients";
     }
 
-    @PostMapping("/deleteDevice")
-    public String deleteDevice(@RequestParam("deviceId") Long id) {
-        clientService.deleteDevice(id);
-        return "redirect:/client/listOfClients";
-    }
 
     @GetMapping("/editDevice")
     public String editDevice(@RequestParam("deviceId") Long deviceId, @RequestParam("clientId") Long clientId, Model model) {

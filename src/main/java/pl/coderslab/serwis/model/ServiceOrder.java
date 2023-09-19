@@ -1,6 +1,7 @@
 package pl.coderslab.serwis.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.coderslab.serwis.enums.OrderStatus;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -23,14 +24,19 @@ public class ServiceOrder {
     @NotBlank(message = "Pole jest wymagane.")
     private String typeOfService;
 
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status = OrderStatus.UNPLANNED;
+
+
     public ServiceOrder() {
     }
 
-    public ServiceOrder(Long id, LocalDate orderDate, Client client, String typeOfService) {
+    public ServiceOrder(Long id, LocalDate orderDate, Client client, String typeOfService, OrderStatus status) {
         this.id = id;
         this.orderDate = orderDate;
         this.client = client;
         this.typeOfService = typeOfService;
+        this.status = status;
     }
 
     public Long getId() {
@@ -65,6 +71,14 @@ public class ServiceOrder {
         this.typeOfService = typeOfService;
     }
 
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(OrderStatus status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "ServiceOrder{" +
@@ -72,6 +86,7 @@ public class ServiceOrder {
                 ", orderDate=" + orderDate +
                 ", client=" + client +
                 ", typeOfService='" + typeOfService + '\'' +
+                ", status=" + status +
                 '}';
     }
 }

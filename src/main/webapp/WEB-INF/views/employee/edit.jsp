@@ -71,10 +71,10 @@
                             <a href="/serviceOrder/listOfOrders">Zamówienia</a>
                         </li>
                         <li>
-                            <a href="#">Planowanie</a>
+                            <a href="/servicePlan/listOfPlans">Planowanie</a>
                         </li>
                         <li>
-                            <a href="#">Protokoły</a>
+                            <a href="/serviceProtocol/listOfProtocols">Protokoły</a>
                         </li>
                     </ul>
                 </li>

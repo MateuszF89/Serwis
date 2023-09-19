@@ -25,12 +25,6 @@ public class EmployeeController {
         return "employee/listOfEmployees";
     }
 
-    @PostMapping("/deleteEmployee")
-    public String deleteEmployee(@RequestParam("employeeId") Long id){
-        employeeService.deleteEmployee(id);
-        return "redirect:/employee/listOfEmployees";
-    }
-
     @GetMapping("/addEmployee")
     public String showAddEmployeeForm(Model model) {
         model.addAttribute("employee", new Employee());

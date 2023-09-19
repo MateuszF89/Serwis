@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: mateu
-  Date: 17.09.2023
-  Time: 10:25
+  Date: 18.09.2023
+  Time: 14:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,26 +92,29 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Dodaj pracownika</h2>
+                    <h2>Zaplanuj serwis</h2>
                 </div>
             </div>
-            <!-- /. ROW  -->
             <hr />
-            <form:form action="/employee/addEmployee" method="post" modelAttribute="employee">
-
+            <form:form action="/servicePlan/addPlanService" method="post" modelAttribute="servicePlan">
                 <div class="form-group">
-                    <label for="firstName">Imię:</label>
-                    <form:input type="text" path="firstName" id="firstName" class="form-control" style="width: 200px;" />
-                    <form:errors path="firstName" element="div" class="error-message" />
+                    <label for="planeDate">Data planowana:</label>
+                    <form:input type="date" path="planeDate" id="plannedDate" name="plannedDate" class="form-control" style="width: 200px;" required="required"/>
+                    <form:errors path="planeDate" element="div" class="error-message" />
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Nazwisko:</label>
-                    <form:input type="text" path="lastName" id="type" class="form-control" style="width: 200px;" />
-                    <form:errors path="lastName" element="div" class="error-message" />
+                    <label for="employee">Pracownik:</label>
+                    <form:select path="employee.id" id="employee" class="form-control" style="width: 200px;" required="required">
+                        <form:option value="" label="Wybierz pracownika" />
+                        <c:forEach items="${employees}" var="employee">
+                            <form:option value="${employee.id}">${employee.firstName} ${employee.lastName}</form:option>
+                        </c:forEach>
+                    </form:select>
+                    <form:errors path="employee.id" element="div" class="error-message" />
                 </div>
+                <input type="hidden" name="orderId" value="${servicePlan.serviceOrder.id}" />
                 <button type="submit" class="btn btn-success">Zapisz</button>
             </form:form>
-
         </div>
         <!-- /. PAGE INNER  -->
     </div>

@@ -71,10 +71,10 @@
                             <a href="/serviceOrder/listOfOrders">Zamówienia</a>
                         </li>
                         <li>
-                            <a href="#">Planowanie</a>
+                            <a href="/servicePlan/listOfPlans">Planowanie</a>
                         </li>
                         <li>
-                            <a href="#">Protokoły</a>
+                            <a href="/serviceProtocol/listOfProtocols">Protokoły</a>
                         </li>
                     </ul>
                 </li>
@@ -119,20 +119,22 @@
                         </thead>
                         <tbody>
                         <c:forEach items="${orders}" var="order">
-                            <tr>
-                                <td>${order.client.companyName}</td>
-                                <td>${order.client.city}</td>
-                                <td>${order.client.zipCode}</td>
-                                <td>${order.client.street}</td>
-                                <td>${order.typeOfService}</td>
-                                <td>${order.orderDate}</td>
-                                <td>
-                                    <form method="post" action="/serviceOrder/deleteOrder" style="display: inline-block;">
-                                        <input type="hidden" name="orderId" value="${order.id}" />
-                                        <button type="submit" class="btn btn-danger">Usuń zamówienie</button>
-                                    </form>
-                                </td>
-                            </tr>
+                            <c:if test="${order.status == 'UNPLANNED'}">
+                                <tr>
+                                    <td>${order.client.companyName}</td>
+                                    <td>${order.client.city}</td>
+                                    <td>${order.client.zipCode}</td>
+                                    <td>${order.client.street}</td>
+                                    <td>${order.typeOfService}</td>
+                                    <td>${order.orderDate}</td>
+                                    <td>
+                                        <form method="post" action="/serviceOrder/deleteOrder" style="display: inline-block;">
+                                            <input type="hidden" name="orderId" value="${order.id}" />
+                                            <button type="submit" class="btn btn-danger">Usuń zamówienie</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:if>
                         </c:forEach>
                         </tbody>
                     </table>

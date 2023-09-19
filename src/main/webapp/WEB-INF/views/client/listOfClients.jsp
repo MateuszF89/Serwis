@@ -71,10 +71,10 @@
                             <a href="/serviceOrder/listOfOrders">Zamówienia</a>
                         </li>
                         <li>
-                            <a href="#">Planowanie</a>
+                            <a href="/servicePlan/listOfPlans">Planowanie</a>
                         </li>
                         <li>
-                            <a href="#">Protokoły</a>
+                            <a href="/serviceProtocol/listOfProtocols">Protokoły</a>
                         </li>
                     </ul>
                 </li>
@@ -144,10 +144,6 @@
                                                             <input type="hidden" name="clientId" value="${client.id}" />
                                                             <button type="submit" class="btn btn-primary">Edytuj dane urządzenia</button>
                                                         </form>
-                                                        <form method="post" action="/client/deleteDevice" style="display: inline-block;">
-                                                            <input type="hidden" name="deviceId" value="${device.id}" />
-                                                            <button type="submit" class="btn btn-danger">Usuń urządzenie</button>
-                                                        </form>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -159,10 +155,6 @@
                                     <form method="get" action="/client/editClient" style="display: inline-block;">
                                         <input type="hidden" name="clientId" value="${client.id}" />
                                         <button type="submit" class="btn btn-primary">Edytuj dane klienta</button>
-                                    </form>
-                                    <form method="post" action="/client/delete" style="display: inline-block;">
-                                        <input type="hidden" name="clientId" value="${client.id}" />
-                                        <button type="submit" class="btn btn-danger">Usuń klienta</button>
                                     </form>
                                     <form method="get" action="/client/addDevice" style="display: inline-block;">
                                         <input type="hidden" name="clientId" value="${client.id}" />

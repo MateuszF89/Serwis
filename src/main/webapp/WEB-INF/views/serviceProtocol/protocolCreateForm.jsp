@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: mateu
   Date: 18.09.2023
-  Time: 08:50
+  Time: 19:49
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,44 +92,58 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Edytuj dane klienta</h2>
+                    <h2>Stwórz protokół</h2>
                 </div>
             </div>
-            <!-- /. ROW  -->
             <hr />
-            <form:form action="/client/editClient" method="post" modelAttribute="client">
-                <input type="hidden" name="id" value="${client.id}" />
-
+            <form:form action="/serviceProtocol/addProtocol" method="post" modelAttribute="protocolToCreate">
                 <div class="form-group">
-                    <label for="companyName">Nazwa firmy:</label>
-                    <form:input type="text" path="companyName" id="companyName" class="form-control" style="width: 200px;" />
-                    <form:errors path="companyName" element="div" class="error-message" />
+                    <label for="executionDate">Data wykonania usługi:</label>
+                    <form:input type="date" path="executionDate" id="executionDate" class="form-control" style="width: 200px;" required="required"/>
+                    <form:errors path="executionDate" element="div" class="error-message" />
                 </div>
-
                 <div class="form-group">
-                    <label for="nip">NIP:</label>
-                    <form:input type="text" path="nip" id="nip" class="form-control" style="width: 200px;" />
-                    <form:errors path="nip" element="div" class="error-message" />
+                    <label for="description">Opis wykonanych czynności:</label>
+                    <form:textarea path="description" id="description" class="form-control" rows="3" required="required"/>
+                    <form:errors path="description" element="div" class="error-message" />
                 </div>
-
                 <div class="form-group">
-                    <label for="city">Miasto:</label>
-                    <form:input type="text" path="city" id="city" class="form-control" style="width: 200px;" />
-                    <form:errors path="city" element="div" class="error-message" />
+                    <label for="comments">Uwagi i zalecenia eksploatacyjne:</label>
+                    <form:textarea path="comments" id="comments" class="form-control" rows="3"/>
+                    <form:errors path="comments" element="div" class="error-message" />
                 </div>
-
                 <div class="form-group">
-                    <label for="zipCode">Kod pocztowy:</label>
-                    <form:input type="text" path="zipCode" id="zipCode" class="form-control" style="width: 200px;" />
-                    <form:errors path="zipCode" element="div" class="error-message" />
+                    <label for="device">Urządzenie:</label>
+                    <form:select path="device.id" id="device" class="form-control" style="width: 200px;" required="required">
+                        <form:option value="" label="Wybierz urządzenie" />
+                        <form:options items="${deviceList}" itemValue="id" itemLabel="type" />
+                    </form:select>
+                    <form:errors path="device.id" element="div" class="error-message" />
                 </div>
-
                 <div class="form-group">
-                    <label for="street">Ulica:</label>
-                    <form:input type="text" path="street" id="street" class="form-control" style="width: 200px;" />
-                    <form:errors path="street" element="div" class="error-message" />
+                    <label for="partsRow">Lista części:</label>
+                    <table id="partsListTable" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Typ</th>
+                            <th>Numer indeksu</th>
+                            <th>Ilość</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr id="partsRow">
+                            <td><input type="text" class="form-control" name="name" /></td>
+                            <td><input type="text" class="form-control" name="type" /></td>
+                            <td><input type="text" class="form-control" name="indexNumber" /></td>
+                            <td><input type="number" class="form-control" name="quantity" /></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <button type="button" id="addPartsButton" class="btn btn-primary">Dodaj część</button>
                 </div>
-
+                <input type="hidden" name="partsList" id="partsList" />
+                <input type="hidden" name="protocolId" value="${protocolToCreate.id}" />
                 <button type="submit" class="btn btn-success">Zapisz</button>
             </form:form>
         </div>
@@ -147,5 +161,54 @@
 <script src="/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="/js/custom.js"></script>
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Przechwycenie przycisku "Dodaj część"
+        $("#addPartsButton").click(function () {
+            // Pobieramy dane wprowadzone przez użytkownika
+            var name = $("input[name='name']").val();
+            var type = $("input[name='type']").val();
+            var indexNumber = $("input[name='indexNumber']").val();
+            var quantity = $("input[name='quantity']").val();
+
+            // Tworzymy obiekt z danymi części
+            var newPart = {
+                name: name,
+                type: type,
+                indexNumber: indexNumber,
+                quantity: quantity
+            };
+
+            // Pobieramy zawartość pola "partsList"
+            var partsListInput = $("#partsList");
+            var partsList = [];
+
+            if (partsListInput.val()) {
+                // Jeśli pole "partsList" nie jest puste, parsujemy je jako JSON
+                partsList = JSON.parse(partsListInput.val());
+            }
+
+            // Dodajemy nową część do listy
+            partsList.push(newPart);
+
+            // Aktualizacja pola "partsList" jako JSON
+            partsListInput.val(JSON.stringify(partsList));
+
+            // Tworzymy nowy wiersz w tabeli z danymi części
+            var newRow = "<tr><td>" + name + "</td><td>" + type + "</td><td>" + indexNumber + "</td><td>" + quantity + "</td></tr>";
+
+            // Dodajemy wiersz do tabeli
+            $("#partsListTable tbody").append(newRow);
+
+            // Czyszczenie pól formularza po dodaniu części
+            $("input[name='name']").val("");
+            $("input[name='type']").val("");
+            $("input[name='indexNumber']").val("");
+            $("input[name='quantity']").val("");
+        });
+    });
+</script>
 </body>
 </html>

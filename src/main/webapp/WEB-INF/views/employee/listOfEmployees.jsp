@@ -71,10 +71,10 @@
                             <a href="/serviceOrder/listOfOrders">Zamówienia</a>
                         </li>
                         <li>
-                            <a href="#">Planowanie</a>
+                            <a href="/servicePlan/listOfPlans">Planowanie</a>
                         </li>
                         <li>
-                            <a href="#">Protokoły</a>
+                            <a href="/serviceProtocol/listOfProtocols">Protokoły</a>
                         </li>
                     </ul>
                 </li>
@@ -121,10 +121,6 @@
                                     <form method="get" action="editEmployee" style="display: inline-block;">
                                         <input type="hidden" name="employeeId" value="${employee.id}" />
                                         <button type="submit" class="btn btn-primary" style="display: inline-block;">Edytuj dane pracownika</button>
-                                    </form>
-                                    <form method="post" action="deleteEmployee" style="display: inline-block;">
-                                        <input type="hidden" name="employeeId" value="${employee.id}" />
-                                        <button type="submit" class="btn btn-danger" style="display: inline-block;">Usuń pracownika</button>
                                     </form>
                                 </td>
                             </tr>

@@ -38,7 +38,7 @@ public class ServiceOrderController {
     }
 
     @PostMapping("/addOrder")
-    public String addOrderForm(@ModelAttribute("serviceOrder") @Valid ServiceOrder serviceOrder, BindingResult bindingResult) {
+    public String addOrderForm(@ModelAttribute("serviceOrder") @Valid ServiceOrder serviceOrder, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             return "serviceOrder/add";
         }

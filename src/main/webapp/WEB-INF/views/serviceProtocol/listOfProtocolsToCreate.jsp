@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: mateu
-  Date: 17.09.2023
-  Time: 10:25
+  Date: 18.09.2023
+  Time: 19:18
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,26 +92,44 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Dodaj pracownika</h2>
+                    <h2>Stwórz protokół</h2>
                 </div>
             </div>
-            <!-- /. ROW  -->
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nazwa firmy</th>
+                            <th>Planowana data wykonania usługi</th>
+                            <th>Imię i Nazwisko pracownika wykonującego usługę</th>
+                            <th>Rodzaj usługi</th>
+                            <th>Akcja</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${protocolsToCreate}" var="protocol">
+                            <c:if test="${protocol.status == 'NOT_DONE'}">
+                                <tr>
+                                    <td>${protocol.serviceOrder.client.companyName}</td>
+                                    <td>${protocol.planeDate}</td>
+                                    <td>${protocol.employee.firstName} ${protocol.employee.lastName}</td>
+                                    <td>${protocol.serviceOrder.typeOfService}</td>
+                                    <td>
+                                        <form method="get" action="/serviceProtocol/createProtocol">
+                                            <input type="hidden" name="protocolId" value="${protocol.id}" />
+                                            <button type="submit" class="btn btn-danger">Stwórz protokół</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
             <hr />
-            <form:form action="/employee/addEmployee" method="post" modelAttribute="employee">
-
-                <div class="form-group">
-                    <label for="firstName">Imię:</label>
-                    <form:input type="text" path="firstName" id="firstName" class="form-control" style="width: 200px;" />
-                    <form:errors path="firstName" element="div" class="error-message" />
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Nazwisko:</label>
-                    <form:input type="text" path="lastName" id="type" class="form-control" style="width: 200px;" />
-                    <form:errors path="lastName" element="div" class="error-message" />
-                </div>
-                <button type="submit" class="btn btn-success">Zapisz</button>
-            </form:form>
-
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -128,4 +146,3 @@
 <!-- CUSTOM SCRIPTS -->
 <script src="/js/custom.js"></script>
 </body>
-</html>

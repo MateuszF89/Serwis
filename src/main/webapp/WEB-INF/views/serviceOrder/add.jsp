@@ -71,10 +71,10 @@
                             <a href="/serviceOrder/listOfOrders">Zamówienia</a>
                         </li>
                         <li>
-                            <a href="#">Planowanie</a>
+                            <a href="/servicePlan/listOfPlans">Planowanie</a>
                         </li>
                         <li>
-                            <a href="#">Protokoły</a>
+                            <a href="/serviceProtocol/listOfProtocols">Protokoły</a>
                         </li>
                     </ul>
                 </li>
@@ -100,17 +100,17 @@
             <form:form action="/serviceOrder/addOrder" method="post" modelAttribute="serviceOrder">
                 <div class="form-group">
                     <label for="orderDate">Data zamówienia:</label>
-                    <form:input type="date" path="orderDate" id="orderDate" name="orderDate" class="form-control" style="width: 200px;" />
+                    <form:input type="date" path="orderDate" id="orderDate" name="orderDate" class="form-control" style="width: 200px;" required="required"/>
                     <form:errors path="orderDate" element="div" class="error-message" />
                 </div>
                 <div class="form-group">
                     <label for="serviceType">Rodzaj usługi:</label>
-                    <form:input type="text" path="typeOfService" id="serviceType" name="typeOfService" class="form-control" style="width: 200px;" />
+                    <form:input type="text" path="typeOfService" id="serviceType" name="typeOfService" class="form-control" style="width: 200px;" required="required"/>
                     <form:errors path="typeOfService" element="div" class="error-message" />
                 </div>
                 <div class="form-group">
                     <label for="client">Klient:</label>
-                    <form:select path="client.id" id="client" name="client.id" class="form-control" style="width: 200px;">
+                    <form:select path="client.id" id="client" name="client.id" class="form-control" style="width: 200px;" required="required">
                         <form:option value="" label="Wybierz klienta" />
                         <form:options items="${clients}" itemValue="id" itemLabel="companyName" />
                     </form:select>

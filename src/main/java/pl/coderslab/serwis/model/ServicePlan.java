@@ -1,11 +1,14 @@
 package pl.coderslab.serwis.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import pl.coderslab.serwis.enums.PlanStatus;
+
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
 
 @Entity
 public class ServicePlan {
@@ -17,11 +20,11 @@ public class ServicePlan {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate planeDate;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate executionDate;
 
-    @NotBlank(message = "Pole jest wymagane.")
+
     private String description;
 
     private String comments;
@@ -34,14 +37,18 @@ public class ServicePlan {
     @JoinColumn(name = "service_order_id")
     private ServiceOrder serviceOrder;
 
+    @OneToMany(mappedBy = "servicePlan")
+    private List<ListOfParts> listOfParts;
+
+    @Enumerated(EnumType.STRING)
+    private PlanStatus status = PlanStatus.NOT_DONE;
     @OneToOne
-    @JoinColumn(name = "list_of_parts_id")
-    private ListOfParts listOfParts;
+    private Device device;
 
     public ServicePlan() {
     }
 
-    public ServicePlan(Long id, LocalDate planeDate, LocalDate executionDate, String description, String comments, Employee employee, ServiceOrder serviceOrder, ListOfParts listOfParts) {
+    public ServicePlan(Long id, LocalDate planeDate, LocalDate executionDate, String description, String comments, Employee employee, ServiceOrder serviceOrder, List<ListOfParts> listOfParts, PlanStatus status, Device device) {
         this.id = id;
         this.planeDate = planeDate;
         this.executionDate = executionDate;
@@ -50,6 +57,8 @@ public class ServicePlan {
         this.employee = employee;
         this.serviceOrder = serviceOrder;
         this.listOfParts = listOfParts;
+        this.status = status;
+        this.device = device;
     }
 
     public Long getId() {
@@ -108,12 +117,28 @@ public class ServicePlan {
         this.serviceOrder = serviceOrder;
     }
 
-    public ListOfParts getListOfParts() {
+    public List<ListOfParts> getListOfParts() {
         return listOfParts;
     }
 
-    public void setListOfParts(ListOfParts listOfParts) {
+    public void setListOfParts(List<ListOfParts> listOfParts) {
         this.listOfParts = listOfParts;
+    }
+
+    public PlanStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(PlanStatus status) {
+        this.status = status;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public void setDevice(Device device) {
+        this.device = device;
     }
 
     @Override
@@ -127,6 +152,8 @@ public class ServicePlan {
                 ", employee=" + employee +
                 ", serviceOrder=" + serviceOrder +
                 ", listOfParts=" + listOfParts +
+                ", status=" + status +
+                ", device=" + device +
                 '}';
     }
 }
