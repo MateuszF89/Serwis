@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: mateu
-  Date: 16.09.2023
-  Time: 10:46
+  Date: 20.09.2023
+  Time: 09:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,34 +92,39 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Edycja części</h2>
+                    <h2>O aplikacji</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <br />
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Aplikacja została wykonana jako projekt końcowy kursu Java Developer w szkole IT Coders Lab. Aplikacja może zostać wykorzystywana do wspomagania prowadzenia działalności serwisu sprężarek lub innego typu serwisu i została opracowana na podstawie realnych danych.</p>
+                    <p>Aplikacja posiada następujące funkcjonalności:</p>
+                    <ul>
+                        <li>Możliwość dodawania, usuwania oraz edycji części w magazynie.</li>
+                        <li>Monitoring dostępnych części w magazynie i generowanie powiadomień o niskim stanie magazynowym.</li>
+                        <li>Historia wszystkich ruchów części w magazynie, w tym przyjęć i wydań.</li>
+                        <li>Dodawanie i edycja pracowników.</li>
+                        <li>Lista pracowników.</li>
+                        <li>Planowanie pracy pracowników.</li>
+                        <li>Lista pracowników.</li>
+                        <li>Dodawanie i edycja klientów.</li>
+                        <li>Lista klientów.</li>
+                        <li>Możliwość dodania i edycji urządzeń posiadanych przez klienta.</li>
+                        <li>Dodawanie i usuwanie listy zamówień serwisowych.</li>
+                        <li>Lista zamówień serwisowych.</li>
+                        <li>Planowanie usług serwisowych z wyznaczeniem pracownika.</li>
+                        <li>Tworzenie protokołu z wykonanej usługi serwisowej.</li>
+                        <li>Lista protokołów.</li>
+                        <li>Szczegóły protokołu.</li>
+                        <li>Generowanie protokołu w PDF za pomocą zewnętrznego API.</li>
+                    </ul>
                 </div>
             </div>
             <!-- /. ROW  -->
             <hr />
-            <form:form action="/warehouse/stockLevel/edit" method="post" modelAttribute="part">
-
-                <form:hidden path="id" />
-                <form:hidden path="quantity" />
-
-                <div class="form-group">
-                    <label for="name">Nazwa:</label>
-                    <form:input type="text" path="name" id="name" class="form-control" style="width: 200px;" />
-                    <form:errors path="name" element="div" class="error-message" />
-                </div>
-                <div class="form-group">
-                    <label for="type">Typ:</label>
-                    <form:input type="text" path="type" id="type" class="form-control" style="width: 200px;" />
-                    <form:errors path="type" element="div" class="error-message" />
-                </div>
-                <div class="form-group">
-                    <label for="indexNumber">Index:</label>
-                    <form:input type="text" path="indexNumber" id="indexNumber" class="form-control" style="width: 200px;" />
-                    <form:errors path="indexNumber" element="div" class="error-message" />
-                </div>
-                <button type="submit" class="btn btn-success">Zapisz</button>
-            </form:form>
-
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -136,5 +141,3 @@
 <!-- CUSTOM SCRIPTS -->
 <script src="/js/custom.js"></script>
 </body>
-</html>
-

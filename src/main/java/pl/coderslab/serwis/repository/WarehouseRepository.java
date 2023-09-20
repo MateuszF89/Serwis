@@ -7,6 +7,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface WarehouseRepository extends JpaRepository<Warehouse, Long> {
-
+    List<Warehouse> findByQuantityLessThanEqual(Integer quantity);
 
 }

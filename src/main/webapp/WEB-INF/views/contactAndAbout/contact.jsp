@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: mateu
-  Date: 16.09.2023
-  Time: 10:46
+  Date: 20.09.2023
+  Time: 09:10
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,34 +92,22 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Edycja części</h2>
+                    <h2>Kontakt</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <br />
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <p>Imię: Mateusz</p>
+                    <p>Nazwisko: Fortuna</p>
+                    <p>Adres email: mateusz.fortuna89@gmail.com</p>
+                    <p>Adres: 38-100 Strzyżów ul. Kościuszki 13</p>
                 </div>
             </div>
             <!-- /. ROW  -->
             <hr />
-            <form:form action="/warehouse/stockLevel/edit" method="post" modelAttribute="part">
-
-                <form:hidden path="id" />
-                <form:hidden path="quantity" />
-
-                <div class="form-group">
-                    <label for="name">Nazwa:</label>
-                    <form:input type="text" path="name" id="name" class="form-control" style="width: 200px;" />
-                    <form:errors path="name" element="div" class="error-message" />
-                </div>
-                <div class="form-group">
-                    <label for="type">Typ:</label>
-                    <form:input type="text" path="type" id="type" class="form-control" style="width: 200px;" />
-                    <form:errors path="type" element="div" class="error-message" />
-                </div>
-                <div class="form-group">
-                    <label for="indexNumber">Index:</label>
-                    <form:input type="text" path="indexNumber" id="indexNumber" class="form-control" style="width: 200px;" />
-                    <form:errors path="indexNumber" element="div" class="error-message" />
-                </div>
-                <button type="submit" class="btn btn-success">Zapisz</button>
-            </form:form>
-
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -136,5 +124,3 @@
 <!-- CUSTOM SCRIPTS -->
 <script src="/js/custom.js"></script>
 </body>
-</html>
-

@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: mateu
-  Date: 16.09.2023
-  Time: 10:46
+  Date: 19.09.2023
+  Time: 20:46
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,34 +92,91 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Edycja części</h2>
+                    <h2>Szczegóły protokołu</h2>
                 </div>
             </div>
-            <!-- /. ROW  -->
-            <hr />
-            <form:form action="/warehouse/stockLevel/edit" method="post" modelAttribute="part">
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-bordered table-hover">
+                        <tbody>
+                        <tr>
+                            <th>Nazwa firmy</th>
+                            <td>${protocolToShow.serviceOrder.client.companyName}</td>
+                        </tr>
+                        <tr>
+                            <th>NIP</th>
+                            <td>${protocolToShow.serviceOrder.client.nip}</td>
+                        </tr>
+                        <tr>
+                            <th>Miasto</th>
+                            <td>${protocolToShow.serviceOrder.client.city}</td>
+                        </tr>
+                        <tr>
+                            <th>Kod pocztowy</th>
+                            <td>${protocolToShow.serviceOrder.client.zipCode}</td>
+                        </tr>
+                        <tr>
+                            <th>Ulica</th>
+                            <td>${protocolToShow.serviceOrder.client.street}</td>
+                        </tr>
+                        <tr>
+                            <th>Data wykonania usługi</th>
+                            <td>${protocolToShow.executionDate}</td>
+                        </tr>
+                        <tr>
+                            <th>Rodzaj usługi</th>
+                            <td>${protocolToShow.serviceOrder.typeOfService}</td>
+                        </tr>
 
-                <form:hidden path="id" />
-                <form:hidden path="quantity" />
-
-                <div class="form-group">
-                    <label for="name">Nazwa:</label>
-                    <form:input type="text" path="name" id="name" class="form-control" style="width: 200px;" />
-                    <form:errors path="name" element="div" class="error-message" />
+                        <tr>
+                            <th>Imię i nazwisko pracownika wykonującego usługę</th>
+                            <td>${protocolToShow.employee.firstName} ${protocolToShow.employee.lastName}</td>
+                        </tr>
+                        <tr>
+                            <th>Opis wykonanych czynności</th>
+                            <td>${protocolToShow.description}</td>
+                        </tr>
+                        <tr>
+                            <th>Uwagi i zalecenia eksploatacyjne</th>
+                            <td>${protocolToShow.comments}</td>
+                        </tr>
+                        <tr>
+                            <th>Typ urządzenia</th>
+                            <td>${protocolToShow.device.type}</td>
+                        </tr>
+                        <tr>
+                            <th>Numer seryjny urządzenia</th>
+                            <td>${protocolToShow.device.serialNumber}</td>
+                        </tr>
+                        <tr>
+                            <th>Rok produkcji urządzenia</th>
+                            <td>${protocolToShow.device.yearOfManufacture}</td>
+                        </tr>
+                        <tr>
+                            <th>Lista wymienionych części</th>
+                            <td>
+                                <ul>
+                                    <c:forEach items="${partsList}" var="part">
+                                        <li>Nazwa: ${part.name}, Typ: ${part.type}, Index: ${part.indexNumber}, Ilość: ${part.quantity}</li>
+                                    </c:forEach>
+                                </ul>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-group">
-                    <label for="type">Typ:</label>
-                    <form:input type="text" path="type" id="type" class="form-control" style="width: 200px;" />
-                    <form:errors path="type" element="div" class="error-message" />
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <form method="get" action="/serviceProtocol/listOfProtocols" style="display: inline-block;">
+                        <button type="submit" class="btn btn-primary">Powrót</button>
+                    </form>
+                    <form method="get" action="/serviceProtocol/generatePDF" style="display: inline-block;">
+                        <button type="submit" class="btn btn-success">Generuj PDF</button>
+                    </form>
                 </div>
-                <div class="form-group">
-                    <label for="indexNumber">Index:</label>
-                    <form:input type="text" path="indexNumber" id="indexNumber" class="form-control" style="width: 200px;" />
-                    <form:errors path="indexNumber" element="div" class="error-message" />
-                </div>
-                <button type="submit" class="btn btn-success">Zapisz</button>
-            </form:form>
-
+            </div>
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -137,4 +194,3 @@
 <script src="/js/custom.js"></script>
 </body>
 </html>
-

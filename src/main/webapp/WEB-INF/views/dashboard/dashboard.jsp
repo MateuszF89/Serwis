@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: mateu
-  Date: 16.09.2023
-  Time: 10:46
+  Date: 20.09.2023
+  Time: 08:43
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -92,34 +92,73 @@
         <div id="page-inner">
             <div class="row">
                 <div class="col-md-12">
-                    <h2>Edycja części</h2>
+                    <h2>Pulpit</h2>
+                </div>
+            </div>
+            <!-- /. ROW  -->
+            <br />
+            <!-- /. ROW  -->
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Alerty niskiego stanu magazynowego</h3>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nazwa</th>
+                            <th>Typ</th>
+                            <th>Index</th>
+                            <th>Ilość</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${lowStock}" var="item">
+                            <tr>
+                                <td>${item.name}</td>
+                                <td>${item.type}</td>
+                                <td>${item.indexNumber}</td>
+                                <td>${item.quantity}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <!-- /. ROW  -->
             <hr />
-            <form:form action="/warehouse/stockLevel/edit" method="post" modelAttribute="part">
 
-                <form:hidden path="id" />
-                <form:hidden path="quantity" />
-
-                <div class="form-group">
-                    <label for="name">Nazwa:</label>
-                    <form:input type="text" path="name" id="name" class="form-control" style="width: 200px;" />
-                    <form:errors path="name" element="div" class="error-message" />
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Plan pracy pracowników</h3>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Planowana data</th>
+                            <th>Imię</th>
+                            <th>Nazwisko</th>
+                            <th>Nazwa firmy</th>
+                            <th>Miasto</th>
+                            <th>Ulica</th>
+                            <th>Kod pocztowy</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${workPlane}" var="item">
+                            <tr>
+                                <td>${item.planeDate}</td>
+                                <td>${item.firstName}</td>
+                                <td>${item.lastName}</td>
+                                <td>${item.companyName}</td>
+                                <td>${item.city}</td>
+                                <td>${item.street}</td>
+                                <td>${item.zipCode}</td>
+                            </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="form-group">
-                    <label for="type">Typ:</label>
-                    <form:input type="text" path="type" id="type" class="form-control" style="width: 200px;" />
-                    <form:errors path="type" element="div" class="error-message" />
-                </div>
-                <div class="form-group">
-                    <label for="indexNumber">Index:</label>
-                    <form:input type="text" path="indexNumber" id="indexNumber" class="form-control" style="width: 200px;" />
-                    <form:errors path="indexNumber" element="div" class="error-message" />
-                </div>
-                <button type="submit" class="btn btn-success">Zapisz</button>
-            </form:form>
-
+            </div>
+            <!-- /. ROW  -->
+            <hr />
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -136,5 +175,3 @@
 <!-- CUSTOM SCRIPTS -->
 <script src="/js/custom.js"></script>
 </body>
-</html>
-

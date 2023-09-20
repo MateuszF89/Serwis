@@ -37,8 +37,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">O aplikacji</a></li>
-                    <li><a href="#">Kontakt</a></li>
+                    <li><a href="/about/">O aplikacji</a></li>
+                    <li><a href="/contact/">Kontakt</a></li>
                 </ul>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     <img src="/img/find_user.png" class="img-responsive" />
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-desktop "></i>Pulpit</a>
+                    <a href="/dashboard/"><i class="fa fa-desktop "></i>Pulpit</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-edit "></i>Magazyn<span class="fa arrow"></span></a>
@@ -129,6 +129,7 @@
                             <th>Typ</th>
                             <th>Numer indeksu</th>
                             <th>Ilość</th>
+                            <th>Operacje</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -137,6 +138,7 @@
                             <td><input type="text" class="form-control" name="type" /></td>
                             <td><input type="text" class="form-control" name="indexNumber" /></td>
                             <td><input type="number" class="form-control" name="quantity" /></td>
+                            <td><button type="button" class="btn btn-danger removePartButton">Usuń część</button></td>
                         </tr>
                         </tbody>
                     </table>
@@ -161,54 +163,8 @@
 <script src="/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="/js/custom.js"></script>
-</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function () {
-        // Przechwycenie przycisku "Dodaj część"
-        $("#addPartsButton").click(function () {
-            // Pobieramy dane wprowadzone przez użytkownika
-            var name = $("input[name='name']").val();
-            var type = $("input[name='type']").val();
-            var indexNumber = $("input[name='indexNumber']").val();
-            var quantity = $("input[name='quantity']").val();
-
-            // Tworzymy obiekt z danymi części
-            var newPart = {
-                name: name,
-                type: type,
-                indexNumber: indexNumber,
-                quantity: quantity
-            };
-
-            // Pobieramy zawartość pola "partsList"
-            var partsListInput = $("#partsList");
-            var partsList = [];
-
-            if (partsListInput.val()) {
-                // Jeśli pole "partsList" nie jest puste, parsujemy je jako JSON
-                partsList = JSON.parse(partsListInput.val());
-            }
-
-            // Dodajemy nową część do listy
-            partsList.push(newPart);
-
-            // Aktualizacja pola "partsList" jako JSON
-            partsListInput.val(JSON.stringify(partsList));
-
-            // Tworzymy nowy wiersz w tabeli z danymi części
-            var newRow = "<tr><td>" + name + "</td><td>" + type + "</td><td>" + indexNumber + "</td><td>" + quantity + "</td></tr>";
-
-            // Dodajemy wiersz do tabeli
-            $("#partsListTable tbody").append(newRow);
-
-            // Czyszczenie pól formularza po dodaniu części
-            $("input[name='name']").val("");
-            $("input[name='type']").val("");
-            $("input[name='indexNumber']").val("");
-            $("input[name='quantity']").val("");
-        });
-    });
-</script>
+<script src="/js/app.js"></script>
 </body>
 </html>
+

@@ -37,8 +37,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">O aplikacji</a></li>
-                    <li><a href="#">Kontakt</a></li>
+                    <li><a href="/about/">O aplikacji</a></li>
+                    <li><a href="/contact/">Kontakt</a></li>
                 </ul>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     <img src="/img/find_user.png" class="img-responsive" />
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-desktop "></i>Pulpit</a>
+                    <a href="/dashboard/"><i class="fa fa-desktop "></i>Pulpit</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-edit "></i>Magazyn<span class="fa arrow"></span></a>

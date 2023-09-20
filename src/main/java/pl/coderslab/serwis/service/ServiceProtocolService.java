@@ -4,17 +4,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import pl.coderslab.serwis.enums.PlanStatus;
 import pl.coderslab.serwis.model.*;
 import pl.coderslab.serwis.repository.*;
 
-import javax.transaction.Transactional;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 
@@ -27,15 +23,14 @@ public class ServiceProtocolService {
 
 
 
-    public List<ServicePlan> getProtocolToCreate() {
+    public List<ServicePlan> getProtocols() {
         return servicePlanRepository.findAll();
     }
 
-    public ServicePlan getProtocolToCreate(Long protocolId) {
+    public ServicePlan getProtocol(Long protocolId) {
         Optional<ServicePlan> optionalServicePlan = servicePlanRepository.findById(protocolId);
         if (optionalServicePlan.isPresent()) {
             ServicePlan servicePlan = optionalServicePlan.get();
-
             return servicePlan;
         } else {
             throw new NoSuchElementException("Nie znaleziono planu serwisu o podanym ID: " + protocolId);
@@ -92,5 +87,11 @@ public class ServiceProtocolService {
             throw new NoSuchElementException("Nie znaleziono planu serwisu o podanym ID: " + protocolId);
         }
     }
+
+    public List<ListOfParts> getListOfParts(Long protocolId){
+        return listOfPartsRepository.findAllByProtocolId(protocolId);
+    }
+
+
 
 }

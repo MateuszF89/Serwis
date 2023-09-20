@@ -37,8 +37,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">O aplikacji</a></li>
-                    <li><a href="#">Kontakt</a></li>
+                    <li><a href="/about/">O aplikacji</a></li>
+                    <li><a href="/contact/">Kontakt</a></li>
                 </ul>
             </div>
         </div>
@@ -51,7 +51,7 @@
                     <img src="/img/find_user.png" class="img-responsive" />
                 </li>
                 <li>
-                    <a href="index.html"><i class="fa fa-desktop "></i>Pulpit</a>
+                    <a href="/dashboard/"><i class="fa fa-desktop "></i>Pulpit</a>
                 </li>
                 <li>
                     <a href="#"><i class="fa fa-edit "></i>Magazyn<span class="fa arrow"></span></a>
@@ -109,7 +109,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:forEach items="${protocolsToCreate}" var="protocol">
+                        <c:forEach items="${protocols}" var="protocol">
                             <c:if test="${protocol.status == 'NOT_DONE'}">
                                 <tr>
                                     <td>${protocol.serviceOrder.client.companyName}</td>
@@ -130,6 +130,40 @@
                 </div>
             </div>
             <hr />
+            <div class="row">
+                <div class="col-md-12">
+                    <h2>Protokoły</h2>
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nazwa firmy</th>
+                            <th>Data wykonania usługi</th>
+                            <th>Imię i Nazwisko pracownika wykonującego usługę</th>
+                            <th>Rodzaj usługi</th>
+                            <th>Akcja</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${protocols}" var="protocol">
+                            <c:if test="${protocol.status == 'DONE'}">
+                                <tr>
+                                    <td>${protocol.serviceOrder.client.companyName}</td>
+                                    <td>${protocol.executionDate}</td>
+                                    <td>${protocol.employee.firstName} ${protocol.employee.lastName}</td>
+                                    <td>${protocol.serviceOrder.typeOfService}</td>
+                                    <td>
+                                        <form method="get" action="/serviceProtocol/showProtocol">
+                                            <input type="hidden" name="protocolId" value="${protocol.id}" />
+                                            <button type="submit" class="btn btn-info">Szczegóły protokołu</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
         <!-- /. PAGE INNER  -->
     </div>
@@ -146,3 +180,4 @@
 <!-- CUSTOM SCRIPTS -->
 <script src="/js/custom.js"></script>
 </body>
+</html>
