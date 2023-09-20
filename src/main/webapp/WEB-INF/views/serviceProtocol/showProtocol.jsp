@@ -102,63 +102,65 @@
                         <tbody>
                         <tr>
                             <th>Nazwa firmy</th>
-                            <td>${protocolToShow.serviceOrder.client.companyName}</td>
+                            <td id="company-name-td"> ${protocolToShow.serviceOrder.client.companyName}</td>
                         </tr>
                         <tr>
                             <th>NIP</th>
-                            <td>${protocolToShow.serviceOrder.client.nip}</td>
+                            <td id="nip-td"> ${protocolToShow.serviceOrder.client.nip}</td>
                         </tr>
                         <tr>
                             <th>Miasto</th>
-                            <td>${protocolToShow.serviceOrder.client.city}</td>
+                            <td id="city-td"> ${protocolToShow.serviceOrder.client.city}</td>
                         </tr>
                         <tr>
                             <th>Kod pocztowy</th>
-                            <td>${protocolToShow.serviceOrder.client.zipCode}</td>
+                            <td id="zipCode-td"> ${protocolToShow.serviceOrder.client.zipCode}</td>
                         </tr>
                         <tr>
                             <th>Ulica</th>
-                            <td>${protocolToShow.serviceOrder.client.street}</td>
+                            <td id="street-td"> ${protocolToShow.serviceOrder.client.street}</td>
                         </tr>
                         <tr>
                             <th>Data wykonania usługi</th>
-                            <td>${protocolToShow.executionDate}</td>
+                            <td id="executionDate-td"> ${protocolToShow.executionDate}</td>
                         </tr>
                         <tr>
                             <th>Rodzaj usługi</th>
-                            <td>${protocolToShow.serviceOrder.typeOfService}</td>
+                            <td id="serviceType-td">${protocolToShow.serviceOrder.typeOfService}</td>
                         </tr>
 
                         <tr>
                             <th>Imię i nazwisko pracownika wykonującego usługę</th>
-                            <td>${protocolToShow.employee.firstName} ${protocolToShow.employee.lastName}</td>
+                            <td id="nameAdnSurname-td">${protocolToShow.employee.firstName} ${protocolToShow.employee.lastName}</td>
                         </tr>
                         <tr>
                             <th>Opis wykonanych czynności</th>
-                            <td>${protocolToShow.description}</td>
+                            <td id="descriptions-td">${protocolToShow.description}</td>
                         </tr>
                         <tr>
                             <th>Uwagi i zalecenia eksploatacyjne</th>
-                            <td>${protocolToShow.comments}</td>
+                            <td id="comments-td">${protocolToShow.comments}</td>
                         </tr>
                         <tr>
                             <th>Typ urządzenia</th>
-                            <td>${protocolToShow.device.type}</td>
+                            <td id="type-td">${protocolToShow.device.type}</td>
                         </tr>
                         <tr>
                             <th>Numer seryjny urządzenia</th>
-                            <td>${protocolToShow.device.serialNumber}</td>
+                            <td id="serialNumber">${protocolToShow.device.serialNumber}</td>
                         </tr>
                         <tr>
                             <th>Rok produkcji urządzenia</th>
-                            <td>${protocolToShow.device.yearOfManufacture}</td>
+                            <td id="yearOfManufacture">${protocolToShow.device.yearOfManufacture}</td>
                         </tr>
                         <tr>
                             <th>Lista wymienionych części</th>
                             <td>
-                                <ul>
+                                <ul id="parts-list">
                                     <c:forEach items="${partsList}" var="part">
-                                        <li>Nazwa: ${part.name}, Typ: ${part.type}, Index: ${part.indexNumber}, Ilość: ${part.quantity}</li>
+                                        <li data-name="${part.name}" data-type="${part.type}" data-index="${part.indexNumber}" data-quantity="${part.quantity}">
+                                            Nazwa: ${part.name}, Typ: ${part.type}, Index: ${part.indexNumber}, Ilość: ${part.quantity}
+                                        </li>
                                     </c:forEach>
                                 </ul>
                             </td>
@@ -172,9 +174,7 @@
                     <form method="get" action="/serviceProtocol/listOfProtocols" style="display: inline-block;">
                         <button type="submit" class="btn btn-primary">Powrót</button>
                     </form>
-                    <form method="get" action="/serviceProtocol/generatePDF" style="display: inline-block;">
-                        <button type="submit" class="btn btn-success">Generuj PDF</button>
-                    </form>
+                    <button id="generate-pdf-button" class="btn btn-success">Generuj PDF</button>
                 </div>
             </div>
         </div>
@@ -192,5 +192,7 @@
 <script src="/js/jquery.metisMenu.js"></script>
 <!-- CUSTOM SCRIPTS -->
 <script src="/js/custom.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="/js/pdf.js"></script>
 </body>
 </html>
