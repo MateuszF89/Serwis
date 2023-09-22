@@ -30,7 +30,7 @@ The application has the following functionalities:
 - Spring Boot Project (https://github.com/MateuszF89/Serwis.git)
 - SQL database (MySQL)
 
-##Contact
+## Contact
 Mateusz Fortuna
 mateusz.fortuna89@gmail.com
 
