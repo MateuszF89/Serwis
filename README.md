@@ -31,8 +31,8 @@ The application has the following functionalities:
 - SQL database (MySQL)
 
 ## Contact
-Mateusz Fortuna
-mateusz.fortuna89@gmail.com
+email: mateusz.fortuna89@gmail.com
+
 
 
 
