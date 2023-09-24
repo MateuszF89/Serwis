@@ -31,10 +31,33 @@ The application has the following functionalities:
 - SQL database (MySQL)
 
 ## Installation
-- git clone https://github.com/MateuszF89/Serwis.git
-- mvn install
-- mvn spring-boot:run
-- open http://localhost:8080/dashboard/
+1. Download a project
+   Download the project from this repository using the git command:
+   git clone https://github.com/MateuszF89/Serwis.git
+   
+2. Building a project
+   Go to the project directory and use a build tool like Maven or Gradle to build the project. For Maven do:
+   mvn install
+   
+3. Database configuration
+   This project uses a SQL database. Make sure you have access to the database, and then configure the database connection in the 'application.properties       file. Example of database configuration in the file 'application.properties:
+   spring.datasource.url=jdbc:mysql://localhost:3306/database_name?serverTimezone=Europe/Warsaw
+  spring.datasource.username=your_username
+  spring.datasource.password=your_password
+  spring.jpa.hibernate.ddl-auto=update
+  spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+  spring.mvc.view.prefix=/WEB-INF/views/
+  spring.mvc.view.suffix=.jsp
+  spring.web.locale=pl_PL
+  spring.web.locale-resolver=fixed
+    
+4. Launch the application
+   Now you can launch the Spring Boot application with the command:
+   mvn spring-boot:run
+   
+5. Testing the application
+   Open a web browser and go to:
+   http://localhost:8080/dashboard/
 
 ## Contact
 email: mateusz.fortuna89@gmail.com
