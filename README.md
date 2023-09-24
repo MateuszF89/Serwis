@@ -30,6 +30,12 @@ The application has the following functionalities:
 - Spring Boot Project (https://github.com/MateuszF89/Serwis.git)
 - SQL database (MySQL)
 
+## Installation
+- git clone https://github.com/MateuszF89/Serwis.git
+- mvn install
+- mvn spring-boot:run
+- open http://localhost:8080/dashboard/
+
 ## Contact
 email: mateusz.fortuna89@gmail.com
 
